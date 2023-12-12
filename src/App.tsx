@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router,Routes, Route ,Navigate} from 'react-router-dom';
+import Signup from '../src/view/auth/Signup';
+import Login from '../src/view/auth/Login';
+import Home from '../src/view/home/Home';
+import PageNotFound from "../src/components/PageNotFound";
+import { Toaster } from 'react-hot-toast';
+import SuccessPage from "./view/success/SuccessPage";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    const isAuthenticated = sessionStorage.getItem('token') !== null;
+
+    return (
+      <div className="bg-[#e5e7eb] h-[100vh]">
+          <Toaster/>
+          <Router>
+              <Routes>
+                  <Route path="/signup" Component={Signup} />
+                  <Route path="/login" Component={Login} />
+                  <Route path="/page" element={isAuthenticated ? <SuccessPage /> : <Navigate to="/" />} />
+                  <Route  path="/" Component={Home} />
+                  <Route path={"*"} element={<PageNotFound />} />
+              </Routes>
+
+          </Router>
+      </div>
+
   );
 }
 
