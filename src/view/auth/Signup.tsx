@@ -62,7 +62,7 @@ const Signup : React.FC=()=>{
                 password: formData.password,
             };
 
-            console.log(data, "form data")
+
             handleApiCall(data);
         }
     };
@@ -71,9 +71,9 @@ const Signup : React.FC=()=>{
         try{
             setIsLoading(true);
             const response = await axios.post('https://reqres.in/api/register',data);
-            console.log(response,"this is response");
+
             if (response.status === 200 || response.status === 201) {
-                console.log('Request successful:', response.data);
+
 
                 sessionStorage.setItem("authToken", response?.data?.token);
                 toast.success('Login success message!');
