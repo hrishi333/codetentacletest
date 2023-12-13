@@ -15,6 +15,7 @@ const SuccessPage: React.FC = () => {
     const [resetCountdown, setResetCountdown] = useState<number>(Date.now() + TIMEOUT_DURATION);
 
 
+    const isAuthenticated = sessionStorage.getItem('authToken');
 
 
 
@@ -27,7 +28,9 @@ const SuccessPage: React.FC = () => {
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
-
+        if(isAuthenticated===null){
+            navigate('/');
+        }
         if (sessionActive) {
             const remainingTime = resetCountdown - Date.now();
             if (remainingTime > 0) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './App.css';
 import { BrowserRouter as Router,Routes, Route ,Navigate} from 'react-router-dom';
 import Signup from '../src/view/auth/Signup';
@@ -11,7 +11,8 @@ import SuccessPage from "./view/success/SuccessPage";
 
 function App() {
 
-    const isAuthenticated = sessionStorage.getItem('token') !== null;
+
+
 
     return (
       <div className="bg-[#e5e7eb] h-[100vh]">
@@ -20,7 +21,7 @@ function App() {
               <Routes>
                   <Route path="/signup" Component={Signup} />
                   <Route path="/login" Component={Login} />
-                  <Route path="/page" element={isAuthenticated ? <SuccessPage /> : <Navigate to="/" />} />
+                  <Route path="/page" Component={SuccessPage}/>
                   <Route  path="/" Component={Home} />
                   <Route path={"*"} element={<PageNotFound />} />
               </Routes>

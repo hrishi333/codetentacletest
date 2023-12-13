@@ -41,10 +41,10 @@ const Signup : React.FC=()=>{
             name:'',
             email: '',
             password: '',
-        };
-        if (!formData.name) {
+        };if (!formData.name) {
             validationErrors.name = 'Name is required';
         }
+
         if (!formData.email) {
             validationErrors.email = 'Email is required';
         }
